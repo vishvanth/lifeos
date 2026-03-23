@@ -556,7 +556,8 @@ function AIChat({ projects, stats, onRefresh }) {
           setPendingGoal({ extracted, readyToSave: true });
           const tasks = extracted.tasks?.map((t) => `• ${t.title} (${t.estimated_mins}m, ${t.difficulty})`).join("\n") || "No tasks extracted";
           const daysLeft = extracted.deadline ? Math.ceil((new Date(extracted.deadline) - new Date()) / 86400000) : null;
-          const hrsPerDay = daysLeft && extracted.estimated_hours ? (extracted.estimated_hours / daysLeft).toFixed(1) : null;
+          const hrsPerDay = daysLeft && daysLeft > 0 && extracted.estimated_hours ? (extracted.estimated_hours / daysLeft).toFixed(1) : null;
+
 
           addMessage("assistant",
             `Got it! Here's what I extracted:\n\n` +

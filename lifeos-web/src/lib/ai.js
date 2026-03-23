@@ -155,7 +155,9 @@ export async function chat(messages, system = "") {
 }
 
 export async function extractGoalFromText(userText, existingProjects = []) {
+  const today = new Date().toISOString().split("T")[0];
   const system = `You are LifeOS, an AI productivity assistant.
+Today's date is ${today}. Always use this as reference for relative dates like "next Friday" or "tomorrow".
 Extract structured goal/project data from the user's message.
 Return ONLY valid JSON, no markdown, no explanation.
 
